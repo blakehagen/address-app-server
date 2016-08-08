@@ -8,8 +8,8 @@ module.exports = (app, passport) => {
   // USER SIGN UP ROUTES //
   // =================== //
   app.post('/api/v1/signup', passport.authenticate('local-signup', {
-      successRedirect: '/registerSuccess',
-      failureRedirect: '/registerFailure'
+      successRedirect: 'https://address-app-server.herokuapp.com/registerSuccess',
+      failureRedirect: 'https://address-app-server.herokuapp.com/registerFailure'
     })
   );
 
