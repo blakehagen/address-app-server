@@ -4,7 +4,7 @@ module.exports = {
 
   signupSuccess: (req, res) => {
     console.log('req ++++++++++', req);
-    res.status(200).json({user: req.user, session: req.session, message: 'Success'});
+    res.status(200).json({user: req.user, session: req.session.passport.user, message: 'Success'});
   },
 
   signupFailure: (req, res) => {
