@@ -41,7 +41,7 @@ module.exports = (passport) => {
           return done(null, false)
         } else {
           models.User.create(req.body).then(user => {
-            console.log('user::::::::::::::::::::::', user::::::::::::::::::::::);
+            console.log('user::::::::::::::::::::::', user);
             return done(null, user);
           })
         }
