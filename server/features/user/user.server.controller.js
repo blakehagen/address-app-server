@@ -3,8 +3,8 @@
 module.exports = {
 
   signupSuccess: (req, res) => {
-    console.log('req ++++++++++', req);
-    res.status(200).json({user: req.user, session: JSON.stringify(req.sessionStore.session.sessions), message: 'Success'});
+    console.log('req.user ++++++++++', req.user);
+    res.status(200).json({user: req.user, message: 'Success'});
   },
 
   signupFailure: (req, res) => {
