@@ -2,8 +2,8 @@
 
 module.exports = {
 
-  signupSuccess: (req, res, user) => {
-    res.status(200).json({user: user, message: 'Success'});
+  signupSuccess: (req, res) => {
+    res.status(200).json({user: req.user, message: 'Success'});
   },
 
   signupFailure: (req, res) => {

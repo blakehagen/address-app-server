@@ -40,6 +40,7 @@ module.exports = (passport) => {
         if (user) {
           return done(null, false)
         } else {
+          console.log('req.body::::::::::', req.body);
           models.User.create(req.body).then(user => {
             return done(null, user);
           })
