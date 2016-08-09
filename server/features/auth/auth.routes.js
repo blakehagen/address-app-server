@@ -1,7 +1,5 @@
 'use strict';
 
-const userCtrl = require('../user/user.server.controller');
-
 module.exports = (app, passport) => {
 
   // ==================== //
@@ -14,27 +12,33 @@ module.exports = (app, passport) => {
   );
 
   // USER SIGN UP FAILURE ROUTE //
-  app.get('/registerFailure', userCtrl.signupFailure);
+  app.get('/registerFailure', (req, res) => {
+    res.send('Unable to create new user');
+  });
 
   // USER SIGN UP SUCCESS ROUTE //
-  app.get('/registerSuccess', userCtrl.signupSuccess);
+  app.get('/registerSuccess', (req, res) => {
+    res.status(200).json({user: req.user, message: 'Success'});
+  });
 
 
-// ================== //
-// USER LOGIN ROUTES //
-// ================= //
+  // ================== //
+  // USER LOGIN ROUTES //
+  // ================= //
   app.post('/api/v1/login', passport.authenticate('local-login', {
       successRedirect: '/loginSuccess',
       failureRedirect: '/loginFailure'
     })
   );
 
-// USER SIGN UP FAILURE ROUTE //
-  app.get('/loginFailure', userCtrl.loginFailure);
+  // USER LOGIN FAILURE ROUTE //
+  app.get('/loginFailure', (req, res) => {
+    res.send('Login Failed');
+  });
 
-// USER SIGN UP SUCCESS ROUTE //
-  app.get('/loginSuccess', userCtrl.loginSuccess);
+  // USER LOGIN SUCCESS ROUTE //
+  app.get('/loginSuccess', (req, res) => {
+    res.status(200).json({user: req.user, message: 'Success'});
+  });
 
 };
-
-

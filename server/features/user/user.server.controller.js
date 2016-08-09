@@ -1,21 +1,18 @@
 'use strict';
 
+const models = require('../../models/index');
+
 module.exports = {
 
-  signupSuccess: (req, res) => {
-    res.status(200).json({user: req.user, message: 'Success'});
-  },
-
-  signupFailure: (req, res) => {
-    res.send('Unable to create new user');
-  },
-
-  loginSuccess: (req, res) => {
-    res.status(200).json({user: req.user, message: 'Success'});
-  },
-
-  loginFailure: (req, res) => {
-    res.send('Login Failed');
+  // GET ONE USER BY ID //
+  getUser: (req, res) => {
+    models.User.findOne({
+      where: {
+        'id': req.params.id
+      }
+    }).then(user => {
+      res.status(200).json(user);
+    })
   }
 
 

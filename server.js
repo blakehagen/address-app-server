@@ -14,20 +14,23 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./server/config/passport-local')(passport); // PASSPORT CONFIG //
 
-// ====== //
-// ROUTES //
-// ====== //
+
+// // // ====== // // //
+// // // ROUTES // // //
+// // // ====== // // //
+
+// AUTH ROUTES //
 require('./server/features/auth/auth.routes')(app, passport);
-
-
-// TEST  //
+// USER ROUTES //
+require('./server/features/user/user.server.routes')(app);
+// TEST ROUTE //
 app.get('/api/v1/test', (req, res) => {
   res.status(200).send('Light \'em up! We good to go!');
 });
 
-// ==== //
-// PORT //
-// ==== //
+// // // ==== // // //
+// // // PORT // // //
+// // // ==== // // //
 const port = process.env.PORT || 4500;
 app.listen(port, () => {
   console.log('Check me out on port', port);
