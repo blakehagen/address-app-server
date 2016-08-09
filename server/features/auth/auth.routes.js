@@ -8,8 +8,8 @@ module.exports = (app, passport) => {
   // USER SIGN UP ROUTES //
   // =================== //
   app.post('/api/v1/signup', passport.authenticate('local-signup', {
-      successRedirect: 'http://address-app-server.herokuapp.com/registerSuccess',
-      failureRedirect: 'http://address-app-server.herokuapp.com/registerFailure'
+      successRedirect: '/registerSuccess',
+      failureRedirect: '/registerFailure'
     })
   );
 
@@ -17,7 +17,24 @@ module.exports = (app, passport) => {
   app.get('/registerFailure', userCtrl.signupFailure);
 
   // USER SIGN UP SUCCESS ROUTE //
-  app.get('/registerSuccess', userCtrl.signupSuccess)
+  app.get('/registerSuccess', userCtrl.signupSuccess);
+
+
+// ================== //
+// USER LOGIN ROUTES //
+// ================= //
+  app.post('/api/v1/login', passport.authenticate('local-login', {
+      successRedirect: '/loginSuccess',
+      failureRedirect: '/loginFailure'
+    })
+  );
+
+// USER SIGN UP FAILURE ROUTE //
+  app.get('/loginFailure', userCtrl.loginFailure);
+
+// USER SIGN UP SUCCESS ROUTE //
+  app.get('/loginSuccess', userCtrl.loginSuccess);
 
 };
+
 

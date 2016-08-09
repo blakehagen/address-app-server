@@ -21,6 +21,6 @@ module.exports = () => {
     saveUninitialized: true
   }));
 
-  // app.use(express.static('www'));
+  app.use(express.static('www'));
   return app;
 };
