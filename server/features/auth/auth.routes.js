@@ -21,7 +21,6 @@ module.exports = (app, passport) => {
     res.status(200).json({user: req.user, message: 'Success'});
   });
 
-
   // ================== //
   // USER LOGIN ROUTES //
   // ================= //
