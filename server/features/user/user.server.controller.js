@@ -6,10 +6,9 @@ module.exports = {
 
   // GET ONE USER BY ID //
   getUser: (req, res) => {
-    models.User.findOne({
-      where: {
-        'id': req.params.id
-      }
+
+    models.User.findById(req.params.id, {
+      include: models.Address
     }).then(user => {
       res.status(200).json(user);
     })
