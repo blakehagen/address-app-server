@@ -53,7 +53,7 @@ module.exports = (app, passport) => {
   //==============//
   app.get('/api/v1/me', function(req, res){
     if(req.user){
-      res.status(200).json(req.user)
+      res.status(200).json({user: req.user, endpoint: '/api/v1/me'});
     } else {
       res.status(401).send('NO CURRENT USER');
     }
