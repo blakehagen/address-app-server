@@ -23,6 +23,9 @@ require('./server/config/passport-local')(passport); // PASSPORT CONFIG //
 require('./server/features/auth/auth.routes')(app, passport);
 // USER ROUTES //
 require('./server/features/user/user.server.routes')(app);
+// ADDRESS ROUTES //
+require('./server/features/address/address.server.routes')(app);
+
 // TEST ROUTE //
 app.get('/api/v1/test', (req, res) => {
   res.status(200).send('Light \'em up! We good to go!');
