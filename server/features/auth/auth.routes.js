@@ -32,7 +32,7 @@ module.exports = (app, passport) => {
 
   // USER LOGIN FAILURE ROUTE //
   app.get('/loginFailure', (req, res) => {
-    res.send('Login Failed');
+    res.status(500).send('Login Failed');
   });
 
   // USER LOGIN SUCCESS ROUTE //
