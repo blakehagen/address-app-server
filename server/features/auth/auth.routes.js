@@ -1,6 +1,6 @@
 'use strict';
 const jwt    = require('jwt-simple');
-const secret = require('../../config/secret');
+// const secret = require('../../config/secret');
 
 module.exports = (app, passport) => {
 
@@ -40,7 +40,7 @@ module.exports = (app, passport) => {
   // USER LOGIN SUCCESS ROUTE //
   app.get('/loginSuccess', (req, res) => {
 
-    var token = jwt.encode({email: req.user.email}, secret.tokenSecret);
+    var token = jwt.encode({email: req.user.email}, 'test');
 
     console.log('token', token);
 
