@@ -7,12 +7,12 @@ const jwt        = require('jwt-simple');
 const bodyParser = require('body-parser');
 const cors       = require('cors');
 const logger     = require('morgan');
-const secret     = require('./secret');
+// const secret     = require('./secret');
 
 module.exports = () => {
   const app = express();
 
-  app.set('jwtTokenSecret', secret.tokenSecret);
+  app.set('jwtTokenSecret', 'test');
   app.use(logger('dev'));
   app.use(cors());
   app.use(bodyParser.json());
