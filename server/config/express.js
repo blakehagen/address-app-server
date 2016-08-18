@@ -3,14 +3,16 @@
 // EXPRESS //
 const express    = require('express');
 const session    = require('express-session');
+const jwt        = require('jwt-simple');
 const bodyParser = require('body-parser');
 const cors       = require('cors');
 const logger     = require('morgan');
+const secret     = require('./secret');
 
 module.exports = () => {
   const app = express();
 
-
+  app.set('jwtTokenSecret', secret.tokenSecret);
   app.use(logger('dev'));
   app.use(cors());
   app.use(bodyParser.json());

@@ -1,4 +1,6 @@
 'use strict';
+const jwt    = require('jwt-simple');
+const secret = require('../../config/secret');
 
 module.exports = (app, passport) => {
 
@@ -37,13 +39,18 @@ module.exports = (app, passport) => {
 
   // USER LOGIN SUCCESS ROUTE //
   app.get('/loginSuccess', (req, res) => {
-    res.status(200).json({user: req.user, message: 'Success'});
+
+    var token = jwt.encode({email: req.user.email}, secret.tokenSecret);
+
+    console.log('token', token);
+
+    res.status(200).json({user: req.user, message: 'Success', token: token});
   });
 
   //====================//
   // USER LOGOUT ROUTES //
   //===================//
-  app.get('/logout', function(req, res){
+  app.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
   });
@@ -51,8 +58,8 @@ module.exports = (app, passport) => {
   //===============//
   // WHO IS USER? //
   //==============//
-  app.get('/api/v1/me', function(req, res){
-    if(req.user){
+  app.get('/api/v1/me', function (req, res) {
+    if (req.user) {
       res.status(200).json({user: req.user, endpoint: '/api/v1/me'});
     } else {
       res.status(401).send('NO CURRENT USER');
