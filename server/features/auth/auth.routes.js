@@ -65,5 +65,23 @@ module.exports = (app, passport) => {
       res.status(401).send('NO CURRENT USER');
     }
   });
+  
+  // TEST TEST TEST //
+  
+  app.get('/api/v1/protected', (req, res) => {
+
+    if(!req.headers.authorization){
+      return res.status(401).json('Unauthorized');
+    }
+    console.log('req.headers.authorization:::::::', req.headers.authorization);
+
+    var token = req.headers.authorization.split(' ')[1];
+
+    var payload = jwt.decode(token, 'test');
+    console.log('payload::::: ', payload);
+
+    res.send(req.headers.authorization);
+
+  })
 
 };
