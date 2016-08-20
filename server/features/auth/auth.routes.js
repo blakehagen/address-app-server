@@ -40,7 +40,7 @@ module.exports = (app, passport) => {
   // USER LOGIN SUCCESS ROUTE //
   app.get('/loginSuccess', (req, res) => {
 
-    var token = jwt.encode({email: req.user.email}, 'test');
+    var token = jwt.encode({user: req.user}, 'test');
 
     console.log('token', token);
 
