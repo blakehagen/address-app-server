@@ -10,7 +10,6 @@ const logger     = require('morgan');
 module.exports = () => {
   const app = express();
 
-  app.set('jwtTokenSecret', process.env.JWT_SECRET);
   app.use(logger('dev'));
   app.use(cors());
   app.use(bodyParser.json());

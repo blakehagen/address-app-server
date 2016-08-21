@@ -29,10 +29,10 @@ module.exports = (app) => {
 
     var token = req.headers.authorization.split(' ')[1];
 
-    var payload = jwt.decode(token, process.env.JWT_SECRET);
-    console.log('payload::::: ', payload);
+    var decoded = jwt.decode(token, process.env.JWT_SECRET || 'test');
+    console.log('===== decoded token =====:::::> ', decoded);
 
-    res.send(req.headers.authorization);
+    res.status(200).json({message: 'PERMISSION GRANTED. YAY!'});
 
   })
 
