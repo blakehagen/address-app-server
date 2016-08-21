@@ -2,7 +2,7 @@
 
 const authCtrl = require('./auth.server.controller');
 const jwt      = require('jwt-simple');
-const secret   = require('../../config/secret');
+// const secret   = require('../../config/secret');
 
 
 module.exports = (app) => {
@@ -34,7 +34,7 @@ module.exports = (app) => {
 
     var token = req.headers.authorization.split(' ')[1];
 
-    var payload = jwt.decode(token, secret.tokenSecret);
+    var payload = jwt.decode(token, process.env.JWT_SECRET);
     console.log('payload::::: ', payload);
 
     res.send(req.headers.authorization);
