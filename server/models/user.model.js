@@ -1,7 +1,6 @@
 'use strict';
 
-// const BPromise = require('bluebird');
-// const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt-nodejs');
 
 module.exports = (sequelize, DataTypes) => {
   let models;
@@ -19,6 +18,14 @@ module.exports = (sequelize, DataTypes) => {
       init: function (_models) {
         models = _models;
         User.hasOne(models.Address)
+      },
+      generateHash: function (password) {
+        return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+      }
+    },
+    instanceMethods: {
+      validPassword: function (password) {
+        return bcrypt.compareSync(password, this.password);
       }
     }
   });

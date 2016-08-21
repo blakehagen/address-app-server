@@ -1,76 +1,26 @@
 'use strict';
-const jwt    = require('jwt-simple');
-// const secret = require('../../config/secret');
 
-module.exports = (app, passport) => {
+const authCtrl = require('./auth.server.controller');
 
-  // ==================== //
-  // USER SIGN UP ROUTES //
-  // =================== //
-  app.post('/api/v1/signup', passport.authenticate('local-signup', {
-      successRedirect: '/registerSuccess',
-      failureRedirect: '/registerFailure'
-    })
-  );
+module.exports = (app) => {
 
-  // USER SIGN UP FAILURE ROUTE //
-  app.get('/registerFailure', (req, res) => {
-    res.send('Unable to create new user');
-  });
+  // ======================= //
+  // USER SIGN UP / REGISTER //
+  // ======================= //
+  app.route('/api/v1/signup')
+    .post(authCtrl.register);
 
-  // USER SIGN UP SUCCESS ROUTE //
-  app.get('/registerSuccess', (req, res) => {
-    res.status(200).json({user: req.user, message: 'Success'});
-  });
+  // ========== //
+  // USER LOGIN //
+  // ========== //
+  app.route('/api/v1/login')
+    .post(authCtrl.login);
 
-  // ================== //
-  // USER LOGIN ROUTES //
-  // ================= //
-  app.post('/api/v1/login', passport.authenticate('local-login', {
-      successRedirect: '/loginSuccess',
-      failureRedirect: '/loginFailure'
-    })
-  );
-
-  // USER LOGIN FAILURE ROUTE //
-  app.get('/loginFailure', (req, res) => {
-    res.status(500).send('Login Failed');
-  });
-
-  // USER LOGIN SUCCESS ROUTE //
-  app.get('/loginSuccess', (req, res) => {
-
-    var token = jwt.encode({user: req.user}, 'test');
-
-    console.log('token', token);
-
-    res.status(200).json({user: req.user, message: 'Success', token: token});
-  });
-
-  //====================//
-  // USER LOGOUT ROUTES //
-  //===================//
-  app.get('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/');
-  });
-
-  //===============//
-  // WHO IS USER? //
-  //==============//
-  app.get('/api/v1/me', function (req, res) {
-    if (req.user) {
-      res.status(200).json({user: req.user, endpoint: '/api/v1/me'});
-    } else {
-      res.status(401).send('NO CURRENT USER');
-    }
-  });
-  
   // TEST TEST TEST //
-  
+
   app.get('/api/v1/protected', (req, res) => {
 
-    if(!req.headers.authorization){
+    if (!req.headers.authorization) {
       return res.status(401).json('Unauthorized');
     }
     console.log('req.headers.authorization:::::::', req.headers.authorization);

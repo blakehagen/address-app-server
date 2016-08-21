@@ -3,24 +3,17 @@
 // APP //
 const babel       = require('babel-core').transform('code');
 const express     = require('./server/config/express.js');
-const passport    = require('passport');
 const environment = process.env.NODE_ENV;
 
 // RUN EXPRESS //
 const app = express();
-
-// INITIALIZE PASSPORT //
-app.use(passport.initialize());
-app.use(passport.session());
-require('./server/config/passport-local')(passport); // PASSPORT CONFIG //
-
 
 // // // ====== // // //
 // // // ROUTES // // //
 // // // ====== // // //
 
 // AUTH ROUTES //
-require('./server/features/auth/auth.routes')(app, passport);
+require('./server/features/auth/auth.routes')(app);
 // USER ROUTES //
 require('./server/features/user/user.server.routes')(app);
 // ADDRESS ROUTES //

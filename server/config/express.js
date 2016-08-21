@@ -3,7 +3,6 @@
 // EXPRESS //
 const express    = require('express');
 const session    = require('express-session');
-const jwt        = require('jwt-simple');
 const bodyParser = require('body-parser');
 const cors       = require('cors');
 const logger     = require('morgan');
