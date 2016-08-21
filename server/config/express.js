@@ -6,8 +6,6 @@ const session    = require('express-session');
 const bodyParser = require('body-parser');
 const cors       = require('cors');
 const logger     = require('morgan');
-// const jwt    = require('jwt-simple');
-// const secret     = require('./secret');
 
 module.exports = () => {
   const app = express();

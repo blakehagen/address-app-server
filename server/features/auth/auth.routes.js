@@ -23,14 +23,9 @@ module.exports = (app) => {
 
   app.get('/api/v1/protected', (req, res) => {
 
-    console.log('req.user', req.user);
-
     if (!req.headers.authorization) {
       return res.status(401).json('Unauthorized');
     }
-
-    var test = req.headers.authorization.split(' ');
-    console.log('test', test);
 
     var token = req.headers.authorization.split(' ')[1];
 
