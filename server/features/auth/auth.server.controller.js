@@ -2,6 +2,7 @@
 
 const models = require('../../models/index');
 const jwt    = require('jwt-simple');
+const secret = require('../../config/secret');
 
 module.exports = {
 
@@ -25,7 +26,7 @@ module.exports = {
         };
 
         models.User.create(newUser).then(user => {
-          let token = jwt.encode({user: req.user}, 'test');
+          let token = jwt.encode({user: req.user}, secret.tokenSecret);
           return res.status(200).json({user: user, message: 'Registration Success', token: token});
         })
       }
@@ -47,7 +48,7 @@ module.exports = {
       } else if (!user.validPassword(req.body.password)) {
         return res.status(400).json({message: 'Invalid password'});
       } else {
-        let token = jwt.encode({user: user}, 'test');
+        let token = jwt.encode({user: user}, secret.tokenSecret);
         return res.status(200).json({user: user, message: 'Login Success', token: token})
       }
     }).catch(err => {
