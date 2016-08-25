@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     classMethods: {
       init: function (_models) {
         models = _models;
+        User.hasOne(models.Address)
       },
       generateHash: function (password) {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
