@@ -33,30 +33,11 @@ module.exports = {
 
     models.Address.create(newAddress).then(newAddress => {
 
-      models.User.findOne({
-        where: {
-          id: req.body.UserId
-        }
-      }).then(user => {
-
-        console.log('user', user);
-
-        let data = {
-          AddressId: newAddress.id
-        };
-
-        user.updateAttributes(data).then(updatedUser => {
-
-          res.status(200).json({
-            user: updatedUser, address: newAddress
-          })
-        })
-      })
+      res.status(200).json({message: 'Address Created', address: newAddress})
 
     }).catch(err => {
       res.status(500).send(err);
     })
-
   },
 
   // UPDATE ADDRESS BY ADDRESS ID //
