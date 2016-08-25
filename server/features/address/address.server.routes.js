@@ -7,6 +7,6 @@ module.exports = (app) => {
     .post(addressCtrl.createAddress);
 
   app.route('/api/v1/address/:id')
-    .post(addressCtrl.updateAddress);
+    .put(addressCtrl.updateAddress);
 
 };
