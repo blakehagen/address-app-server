@@ -42,6 +42,7 @@ module.exports = {
 
   // UPDATE ADDRESS BY ADDRESS ID //
   updateAddress: (req, res) => {
+    console.log('req.body========> ', req.body);
     models.Address.update(req.body, {
       where: {
         id: req.params.id
