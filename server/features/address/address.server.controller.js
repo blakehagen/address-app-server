@@ -52,6 +52,7 @@ module.exports = {
         models.User.findById(req.body.UserId, {
           include: models.Address
         }).then(user => {
+          console.log('updated user ??????  :::::::::::>>>>', user);
           res.status(200).json(user);
         }).catch(error => {
           res.status(500).json(error);
